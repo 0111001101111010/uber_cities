@@ -15,7 +15,7 @@ var input = fs.createReadStream('ubercities.csv');
 readLines(input, func);
 
 function func(line) {
-  cities.push({city:line});
+  cities.push(line);
 }
 
 function readLines(input, func) {
@@ -47,14 +47,13 @@ function geocode(cities) {
   _.each(cities, function (city) {
     geocodio.geocode(city, function(err, res){
       if (err) {
-        console.log(err);
+        console.log(err.stack);
       }
-      decoded.add({
+      decoded.push({
         city: city,
-        location: res.results[0].response.results[0]
+        location: res.results[0].response.results[0].location
       });
-      cities.location = res.results[0].response.results[0];
-      console.log(cities);
+      console.log(decoded);
     });
   });
 }
