@@ -6,14 +6,16 @@ var config = {
     api_key: process.env.GEOCODIO
 };
 
+console.log(config);
 var geocodio = new Geocodio(config);
 var cities = [];
+var decoded = [];
 
 var input = fs.createReadStream('ubercities.csv');
 readLines(input, func);
 
 function func(line) {
-  cities.push(line);
+  cities.push({city:line});
 }
 
 function readLines(input, func) {
@@ -45,9 +47,14 @@ function geocode(cities) {
   _.each(cities, function (city) {
     geocodio.geocode(city, function(err, res){
       if (err) {
-        throw err;
+        console.log(err);
       }
-      console.log(res.results[0].response.results[0]);
+      decoded.add({
+        city: city,
+        location: res.results[0].response.results[0]
+      });
+      cities.location = res.results[0].response.results[0];
+      console.log(cities);
     });
   });
 }
