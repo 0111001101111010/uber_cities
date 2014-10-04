@@ -1,8 +1,9 @@
 var fs = require('fs');
+var _ = require('lodash');
 var Geocodio = require('geocodio');
 
 var config = {
-    api_key: process.env.geocodio
+    api_key: process.env.GEOCODIO
 };
 
 var geocodio = new Geocodio(config);
@@ -36,6 +37,17 @@ function readLines(input, func) {
     if (remaining.length > 0) {
       func(remaining);
     }
-    //geocode(cities);
+    geocode(cities);
+  });
+}
+
+function geocode(cities) {
+  _.each(cities, function (city) {
+    geocodio.geocode(city, function(err, res){
+      if (err) {
+        throw err;
+      }
+      console.log(res.results[0].response.results[0]);
+    });
   });
 }
