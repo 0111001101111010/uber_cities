@@ -49,11 +49,12 @@ function geocode(cities) {
       if (err) {
         console.log(err.stack);
       }
+      console.log(city);
       decoded.push({
         city: city,
         location: res.results[0].response.results[0].location
       });
-      console.log(decoded);
+
     });
   });
 }
