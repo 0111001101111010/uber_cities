@@ -1,0 +1,22 @@
+{
+  "name": "ubercities",
+  "version": "0.0.0",
+  "description": "visualize to demonstrate if you can go from point A-B in the US using only rideshare",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stanzheng/uber_cities.git"
+  },
+  "author": "stanley zheng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stanzheng/uber_cities/issues"
+  },
+  "homepage": "https://github.com/stanzheng/uber_cities",
+  "dependencies": {
+    "geocodio": "0.0.1"
+  }
+}
