@@ -44,17 +44,38 @@ function readLines(input, func) {
 }
 
 function geocode(cities) {
-  _.each(cities, function (city) {
-    geocodio.geocode(city, function(err, res){
-      if (err) {
-        console.log(err.stack);
-      }
-      console.log(city);
+  // _.each(cities, function (city) {
+  //   geocodio.geocode(city, function(err, res){
+  //     if (err) {
+  //       console.log(err.stack);
+  //     }
+  //     console.log(city);
+  //     decoded.push({
+  //       city: city,
+  //       location: res.results[0].response.results[0].location
+  //     });
+  //
+  //   });
+  // });
+  geocodio.geocode(cities, function(err, res){
+    if (err) {
+      console.log(err.stack);
+    }
+    _.each(res.results,function(city){
+      console.log(city.query);
+      if (typeof city.response !== undefined){
       decoded.push({
-        city: city,
+        city: city.query,
         location: res.results[0].response.results[0].location
       });
-
+      }
+      else {
+        decoded.push({
+          city: city.query,
+          location: null
+        });
+      }
+      console.log(decoded);
     });
   });
 }
